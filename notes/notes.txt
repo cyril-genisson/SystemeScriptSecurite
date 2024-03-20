@@ -1,0 +1,28 @@
+Mémoire tampon = mémoire RAM
+
+Ajouter l'utilisateur en sudoers : `su` puis `sudo usermod -aG sudo <nom_utilisateur>`
+Liste de tous les utilisateur : `cut -d: -f1 /etc/passwd`
+Changer le nom d'utilisateur : `sudo usermod -l <newname> <oldname>`
+Changer les droits du fichier à executer : `chmod +x ...`
+
+Modifier fichier `source.list` : `cd /etc/apt/...``
+
+  Puis dans se fichier ajouté :
+
+    Lien : `https://wiki.debian.org/fr/SourcesList`
+
+    `
+      deb http://deb.debian.org/debian bookworm main non-free-firmware
+      deb-src http://deb.debian.org/debian bookworm main non-free-firmware
+
+      deb http://deb.debian.org/debian-security/ bookworm-security main non-free-firmware
+      deb-src http://deb.debian.org/debian-security/ bookworm-security main non-free-firmware
+
+      deb http://deb.debian.org/debian bookworm-updates main non-free-firmware
+      deb-src http://deb.debian.org/debian bookworm-updates main non-free-firmware
+    `
+
+
+Git Hub Branch : 
+  Création Branch + Switch automatiquement avec l'option `-b` :
+    `git checkout -b ma-nouvelle-branche`
