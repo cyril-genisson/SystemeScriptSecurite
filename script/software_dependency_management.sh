@@ -32,7 +32,7 @@ apache_status() {
     status=$(systemctl status apache2)
     is_active=$(systemctl is-active apache2)
 
-    echo -e "----- APACHE STATUS -----\n"
+    echo -e "\n----- APACHE STATUS -----\n"
     echo "Menu :"
     echo "1. Afficher le statut complet d'Apache"
     echo "2. Afficher seulement l'état d'Apache"
@@ -44,7 +44,7 @@ apache_status() {
       echo -e "\n$status"
       ;;
     2)
-      echo -e "\n$is_active"
+      echo -e "\nÉtat : $is_active\n"
       ;;
     3)
       echo "Programme Arrêté."
@@ -76,7 +76,7 @@ nginx_status() {
       echo -e "\n$status"
       ;;
     2)
-      echo -e "\n$is_active"
+      echo -e "\nÉtat : $is_active\n"
       ;;
     3)
       echo "Programme arrêté."
@@ -157,7 +157,7 @@ mariaDB_status() {
     status=$(systemctl status mariadb)
     is_active=$(systemctl is-active mariadb)
 
-    echo -e "----- MARIA DB STATUS -----\n"
+    echo -e "\n----- MARIA DB STATUS -----\n"
     echo "Menu :"
     echo "1. Afficher le statut complet de MariaDB"
     echo "2. Afficher seulement l'état de MariaDB"
@@ -169,7 +169,7 @@ mariaDB_status() {
       echo -e "\n$status"
       ;;
     2)
-      echo -e "\n$is_active"
+      echo -e "\nÉtat : $is_active\n"
       ;;
     3)
       echo "Programme arrêté."
@@ -189,7 +189,7 @@ mysql_install() {
     apt install mysql-server -y
     echo -e "Installation MySQL...\n"
   else
-    echo "MySQL est déjà installé."
+    echo -e "\nMySQL est déjà installé.\n"
   fi
 } # OK
 
@@ -210,7 +210,7 @@ mysql_status() {
       echo -e "\n$status"
       ;;
     2)
-      echo -e "\n$is_active"
+      echo -e "\nÉtat : $is_active\n"
       ;;
     3)
       echo "Programme arrêté."
@@ -256,7 +256,7 @@ nodeJS_install() {
     apt install nodejs -y
     echo -e "Installation de NodeJS...\n"
   else
-    echo -e "\nNodeJS est déjà installé.\n"
+    echo -e "NodeJS est déjà installé.\n"
   fi
 } # OK
 
@@ -265,7 +265,7 @@ git_install() {
     apt install git -y
     echo -e "Installation de Git...\n"
   else
-    echo -e "\nGit est déjà installé.\n"
+    echo -e "Git est déjà installé.\n"
   fi
 } # OK
 

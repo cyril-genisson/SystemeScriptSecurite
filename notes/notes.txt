@@ -22,7 +22,12 @@ Modifier fichier `source.list` : `cd /etc/apt/...``
       deb-src http://deb.debian.org/debian bookworm-updates main non-free-firmware
     `
 
-
 Git Hub Branch : 
   Création Branch + Switch automatiquement avec l'option `-b` :
     `git checkout -b ma-nouvelle-branche`
+
+CRÉER SERVEUR LAMP : `https://tutos-info.fr/wp-content/uploads/2023/08/TUTORIEL-INSTALLER-LAMP-SUR-DEBIAN-12.1.pdf`
+
+SCP : 
+  recuperer ficher sur VM depuis terminal du pc : 
+  `scp utilisateur@adresse_ip_debian:/chemin/vers/le/fichier/nom_du_fichier "/chemin/vers/le/repertoire/destination"`
