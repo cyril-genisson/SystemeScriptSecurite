@@ -21,8 +21,8 @@ main() {
     echo "2. Mettre à jour les logiciels"
     echo "3. Quitter"
 
-    # shellcheck disable=SC2162
-    read -p "Choisissez une option : " choix
+    
+    read -r "Choisissez une option : " choix
 
     case $choix in
     1)
