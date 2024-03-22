@@ -1,11 +1,29 @@
-Mémoire tampon = mémoire RAM
+CRÉER SERVEUR LAMP : `https://tutos-info.fr/wp-content/uploads/2023/08/TUTORIEL-INSTALLER-LAMP-SUR-DEBIAN-12.1.pdf`
 
-Ajouter l'utilisateur en sudoers : `su` puis `sudo usermod -aG sudo <nom_utilisateur>`
-Liste de tous les utilisateur : `cut -d: -f1 /etc/passwd`
-Changer le nom d'utilisateur : `sudo usermod -l <newname> <oldname>`
-Changer les droits du fichier à executer : `chmod +x ...`
+AJOUTER L'UTILISATEUR DANS LES `SUDOERS` : `su` puis `sudo usermod -aG sudo <nom_utilisateur>`
 
-Modifier fichier `source.list` : `cd /etc/apt/...``
+LISTE DE TOUS LES UTILISATEURS : `cut -d: -f1 /etc/passwd`
+
+CHANGER LE NOM D'UTILISATEUR : `sudo usermod -l <newname> <oldname>`
+
+CHANGER LES DROIT D'ÉXÉCUTION : `chmod +x <namefile>`
+
+RENOMER FICHIER : `mv ancien.txt nouveau.txt`
+
+CONNECTER SON PC A SA VM : ``ssh <nom_d'utilisateur@addresse_ip`
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+GIT HUB BRANCH : 
+  Création Branch + Switch automatiquement avec l'option `-b` :
+    `git checkout -b ma-nouvelle-branche`
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Modifier fichier `source.list` : `cd /etc/apt/...`
 
   Puis dans se fichier ajouté :
 
@@ -22,12 +40,22 @@ Modifier fichier `source.list` : `cd /etc/apt/...``
       deb-src http://deb.debian.org/debian bookworm-updates main non-free-firmware
     `
 
-Git Hub Branch : 
-  Création Branch + Switch automatiquement avec l'option `-b` :
-    `git checkout -b ma-nouvelle-branche`
 
-CRÉER SERVEUR LAMP : `https://tutos-info.fr/wp-content/uploads/2023/08/TUTORIEL-INSTALLER-LAMP-SUR-DEBIAN-12.1.pdf`
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 SCP : 
+
+  TOUT DEPUIS LE TERMINAL DU PC ET NON DE LA VM
+
+  RÉCUPÉRER IP : `ip addr` ou `ip addr | grep -o 'inet [0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+\/[0-9]\+' (pour plus de précision)
+
+
   recuperer ficher sur VM depuis terminal du pc : 
-  `scp utilisateur@adresse_ip_debian:/chemin/vers/le/fichier/nom_du_fichier "/chemin/vers/le/repertoire/destination"`
+    Envois fichier du pc a la vm :
+      `scp "/chemin/du/fichier/a/envoyer(exemple.txt)" utilisateur@addr_ip::/chemin/du/fichier/a/placerer/`
+    
+    Recuperer fichier vm depuis son pc :
+      `scp utilisateur@addr_ip:/chemin/du/ficher/a/récupérer(exemple.txt) "/chemin/du/ficher/a/placerer"`
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
