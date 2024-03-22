@@ -312,7 +312,7 @@ main() {
   echo "4. Afficher le statut de MySQL"
   echo "5. Quitter"
 
-  read -p "Choisissez une option : " choix
+  read -rp "Choisissez une option : " choix
 
   case $choix in
   1)
@@ -339,5 +339,3 @@ main() {
 
 # Appel de la fonction principale
 main
-
-
