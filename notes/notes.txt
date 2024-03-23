@@ -1,0 +1,61 @@
+CRÉER SERVEUR LAMP : `https://tutos-info.fr/wp-content/uploads/2023/08/TUTORIEL-INSTALLER-LAMP-SUR-DEBIAN-12.1.pdf`
+
+AJOUTER L'UTILISATEUR DANS LES `SUDOERS` : `su` puis `sudo usermod -aG sudo <nom_utilisateur>`
+
+LISTE DE TOUS LES UTILISATEURS : `cut -d: -f1 /etc/passwd`
+
+CHANGER LE NOM D'UTILISATEUR : `sudo usermod -l <newname> <oldname>`
+
+CHANGER LES DROIT D'ÉXÉCUTION : `chmod +x <namefile>`
+
+RENOMER FICHIER : `mv ancien.txt nouveau.txt`
+
+CONNECTER SON PC A SA VM : ``ssh <nom_d'utilisateur@addresse_ip`
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+GIT HUB BRANCH : 
+  Création Branch + Switch automatiquement avec l'option `-b` :
+    `git checkout -b ma-nouvelle-branche`
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Modifier fichier `source.list` : `cd /etc/apt/...`
+
+  Puis dans se fichier ajouté :
+
+    Lien : `https://wiki.debian.org/fr/SourcesList`
+
+    `
+      deb http://deb.debian.org/debian bookworm main non-free-firmware
+      deb-src http://deb.debian.org/debian bookworm main non-free-firmware
+
+      deb http://deb.debian.org/debian-security/ bookworm-security main non-free-firmware
+      deb-src http://deb.debian.org/debian-security/ bookworm-security main non-free-firmware
+
+      deb http://deb.debian.org/debian bookworm-updates main non-free-firmware
+      deb-src http://deb.debian.org/debian bookworm-updates main non-free-firmware
+    `
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+SCP : 
+
+  TOUT DEPUIS LE TERMINAL DU PC ET NON DE LA VM
+
+  RÉCUPÉRER IP : `ip addr` ou `ip addr | grep -o 'inet [0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+\/[0-9]\+' (pour plus de précision)
+
+
+  recuperer ficher sur VM depuis terminal du pc : 
+    Envois fichier du pc a la vm :
+      `scp "/chemin/du/fichier/a/envoyer(exemple.txt)" utilisateur@addr_ip::/chemin/du/fichier/a/placerer/`
+    
+    Recuperer fichier vm depuis son pc :
+      `scp utilisateur@addr_ip:/chemin/du/ficher/a/récupérer(exemple.txt) "/chemin/du/ficher/a/placerer"`
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
