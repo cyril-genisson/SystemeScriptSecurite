@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 true <<COMMENT
   Pour recenser tous les processus actifs sur votre système :
