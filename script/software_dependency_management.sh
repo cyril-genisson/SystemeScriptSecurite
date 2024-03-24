@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 # Programme de Gestion des dépendances logicielles
 # Version 1.0
 
