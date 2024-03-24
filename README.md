@@ -13,9 +13,6 @@ Configuration:
 
 ```shell
 #!/bin/bash
-#
-# filename: script1
-# author: Cyril GENISSON
 # created: 03/18/2024
 
 WorkDir=$HOME
@@ -38,9 +35,6 @@ grep -rnwl $HOME -e 'force'
 
 ```shell
 #!/bin/bash
-#
-# filename: script2
-# author: Cyril GENISSON
 # created: 03/18/2024
 
 WorkDir="$HOME/Documents"
@@ -68,9 +62,6 @@ tar -xvzf $HOME/Documents/$TAR
 ## Manipulation de texte
 ```shell
 #!/bin/bash
-#
-# filename: script3
-# author: Cyril GENISSON
 # created: 03/18/2024
 
 WorkDir=$HOME
@@ -161,9 +152,6 @@ done
 
 ```shell
 #!/bin/bash
-#
-# filename:
-# author: Cyril GENISSON
 # created: 03/18/2024
 
 
@@ -176,13 +164,116 @@ tar -cvzf $filename Plateforme
 mv $filename $SaveDir
 ```
 
+```shell
+#!/bin/bash
+
+# Vérifier si inotify-tools est installé
+if ! command -v inotifywait &> /dev/null; then
+  echo "Installation de inotify-tools..."
+  sudo apt-get update
+  sudo apt-get install -y inotify-tools
+  echo "Installation terminée."
+fi
+
+source_dir="$HOME/Documents/Plateforme"
+backup_dir="$HOME/Plateforme_Backups_Save"
+backup_log_file="$backup_dir/backup_log_$(date +'%m-%d-%Y_%H:%M:%S').txt"
+
+# Créer le répertoire de sauvegarde s'il n'existe pas
+mkdir -p "$backup_dir"
+
+# Fonction pour lancer la sauvegarde
+perform_backup() {
+  backup_save_file="$backup_dir/backup_$(date +'%m-%d-%Y_%H:%M:%S').tar.gz"
+
+  echo -e "\n----- SAVE PLATEFORME -----"
+  echo -e "$(date +'%m-%d-%Y_%H:%M:%S') : Début de la sauvegarde de $source_dir.."
+  echo "$(date +'%m-%d-%Y_%H:%M:%S') : Début de la sauvegarde de $source_dir..." >> "$backup_log_file"
+  tar -czf "$backup_save_file" -C "$source_dir" . >> "$backup_log_file" 2>&1
+  echo -e "$(date +'%m-%d-%Y %H:%M:%S') : Sauvegarde terminée.."
+  echo "$(date +'%m-%d-%Y %H:%M:%S') : Sauvegarde terminée..." >> "$backup_log_file"
+  echo "$(date +'%m-%d-%Y %H:%M:%S') : $backup_save_file" >> "$backup_dir/backup_history.txt"
+  echo -e "Sauvegarde effectuée avec succès : $backup_save_file\n"
+}
+
+# Lancer une sauvegarde initiale
+perform_backup
+echo "$(date +'%m-%d-%Y %H:%M:%S'): Surveillance des modifications dans le répertoire source ($source_dir)..."
+echo "$(date +'%m-%d-%Y %H:%M:%S'): Surveillance des modifications dans le répertoire source ($source_dir)..." >> "$backup_log_file"
+
+# Surveillance des modifications dans le répertoire source
+while event=$(inotifywait -q -r -e create,modify,delete "$source_dir"); do
+  case $event in
+      CREATE)
+          action="Création de fichier"
+          ;;
+      MODIFY)
+          action="Modification de fichier"
+          ;;
+      DELETE)
+          action="Suppression du fichier"
+          ;;
+      *)
+          # shellcheck disable=SC2034
+          action="Action inconnue"
+          ;;#!/bin/bash
+
+# Fonction pour rechercher les mises à jour disponibles
+search_updates() {
+  echo "Recherche des mises à jour disponibles..."
+  sudo apt update
+}
+
+# Fonction pour mettre à jour les logiciels
+update_software() {
+  echo "Mise à jour des logiciels en cours..."
+  sudo apt upgrade -y
+}
+
+# Fonction Principale
+main() {
+  # Affichage du menu
+  while true; do
+    echo "Menu :"
+    echo "1. Rechercher les mises à jour disponibles"
+    echo "2. Mettre à jour les logiciels"
+    echo "3. Quitter"
+
+
+    read -r "Choisissez une option : " choix
+
+    case $choix in
+    1)
+      search_updates
+      ;;
+    2)
+      update_software
+      ;;
+    3)
+      echo "Au revoir !"
+      exit
+      ;;
+    *)
+      echo "Option invalide. Veuillez entrer un numéro valide."
+      ;;
+    esac
+  done
+}
+
+# Appel de la fonction principale
+main
+  esac
+  echo "$(date +'%m-%d-%Y %H:%M:%S'): $(printf '\033[1;31m%s\033[0m' "$event") DÉTÉCTÉ !"
+  echo -e "\nsauvegarde..\n"
+  echo "$(date +'%m-%d-%Y %H:%M:%S'): $event détecté dans le répertoire source. Lancement de la sauvegarde..." >> "$backup_log_file"
+  perform_backup
+done
+```
+
 ## Automatisation des mises à jour logicielles
 
 ```shell
 #!/bin/bash
-#
-# filename:
-# author: Cyril GENISSON
 # created: 03/18/2024
 
 
@@ -195,12 +286,60 @@ if [ $COUNT -gt 1 ]; then
         echo "System upgraded"
 ```
 
+```shell
+#!/bin/bash
+# Version: 1b
+
+# Fonction pour rechercher les mises à jour disponibles
+search_updates() {
+  echo "Recherche des mises à jour disponibles..."
+  sudo apt update
+}
+
+# Fonction pour mettre à jour les logiciels
+update_software() {
+  echo "Mise à jour des logiciels en cours..."
+  sudo apt upgrade -y
+}
+
+# Fonction Principale
+main() {
+  # Affichage du menu
+  while true; do
+    echo "Menu :"
+    echo "1. Rechercher les mises à jour disponibles"
+    echo "2. Mettre à jour les logiciels"
+    echo "3. Quitter"
+
+
+    read -r "Choisissez une option : " choix
+
+    case $choix in
+    1)
+      search_updates
+      ;;
+    2)
+      update_software
+      ;;
+    3)
+      echo "Au revoir !"
+      exit
+      ;;
+    *)
+      echo "Option invalide. Veuillez entrer un numéro valide."
+      ;;
+    esac
+  done
+}
+
+# Appel de la fonction principale
+main
+```
+
 ## Gestion des dépendances logicielles
 ```shell
 #!/bin/bash
 #
-# filename:
-# author: Cyril GENISSON
 # created: 03/18/2024
 
 URL='https://deb.nodesource.com/setup_20.x'
@@ -217,7 +356,7 @@ systemctl restart mariadb-server
 
 ```shell
 #!/bin/bash
-# Version 2.0
+# Version 1b
 
 update_upgrade_package() {
   update_command="apt update"
@@ -559,53 +698,57 @@ main
 ```
 
 ## Sécuriser ses scripts
-En suivant ces bonnes pratiques, vous pouvez réduire les risques de sécurité associés à vos scripts Bash. Gardez à l'esprit que la sécurité est un processus continu, et il est important de rester vigilant et de surveiller activement les nouvelles menaces et les meilleures pratiques de sécurité.
+En suivant ces bonnes pratiques, nous pouvons réduire les risques de sécurité associés aux scripts shell. Nous gardons à l'esprit que la sécurité est un processus continu, et il est important de rester vigilant et de surveiller activement les nouvelles menaces et les meilleures pratiques de sécurité.
 
 ### 1. Validation des entrées utilisateur
 Toujours valider les entrées utilisateur pour éviter les injections de code ou les
-erreurs potentielles. Utilisez des fonctions comme **read** pour récupérer les
-entrées utilisateur et effectuez une validation pour vous assurer qu'elles sont
-conformes à ce que vous attendez.
+erreurs potentielles. Utiliser des fonctions comme **read** pour récupérer les
+entrées utilisateur et effectuer une validation pour nous assurer qu'elles sont
+conformes à ce que que l'on attend du script.
 
 ### 2. Utilisation de variables
-Utilisez des variables pour stocker des données sensibles et assurez-vous qu'elles
-sont correctement protégées. Évitez d'utiliser des noms de variables prévisibles
+Utilisation des variables pour stocker des données sensibles et s'assurer qu'elles
+sont correctement protégées. Éviter d'utiliser des noms de variables prévisibles
 ou susceptibles d'être remplacés accidentellement par des commandes.
 
 ### 3. Limitation des privilèges
-Évitez d'exécuter des scripts en tant qu'utilisateur **root** sauf si c'est
-absolument nécessaire. Si possible, définissez des permissions strictes pour les
+Éviter d'exécuter des scripts en tant qu'utilisateur **root** sauf si c'est
+absolument nécessaire. Si possible, définir des permissions strictes pour les
 fichiers et répertoires utilisés par les scripts.
 
 ### 4. Échappement des caractères spéciaux
-Échappez les caractères spéciaux dans les données fournies par l'utilisateur pour
-éviter les attaques par injection de code. Vous pouvez utiliser des outils comme
+Échapper les caractères spéciaux dans les données fournies par l'utilisateur pour
+éviter les attaques par injection de code. Nous pouvez utiliser des outils comme
 **sed**, **awk** ou **grep** pour nettoyer les entrées.
 
 ### 5. Mises à jour régulières
-Assurez-vous que vos scripts sont à jour et incluez des mécanismes de mise à jour
+Assurer que nos scripts sont à jour et inclus des mécanismes de mise à jour
 automatique si nécessaire pour corriger les éventuelles vulnérabilités découvertes.
 
 ### 6. Sécurisation des fichiers de script
-Limitez l'accès aux fichiers de script en définissant des permissions appropriées.
-Assurez-vous que seuls les utilisateurs autorisés peuvent les modifier ou les
+Limiter l'accès aux fichiers de script en définissant des permissions appropriées.
+S'assurer que seuls les utilisateurs autorisés peuvent les modifier ou les
 exécuter.
 
 ### 7. Journalisation des activités
-Implémentez une journalisation pour enregistrer les activités des scripts.
-Cela peut vous aider à identifier les comportements suspects ou les problèmes de
+Implémenter une journalisation pour enregistrer les activités des scripts.
+Cela peut aider à identifier les comportements suspects ou les problèmes de
 sécurité potentiels.
 
 ### 8. Révision du code
-Faites réviser votre code par des pairs pour repérer les éventuelles vulnérabilités ou erreurs de logique. Une autre paire d'yeux peut souvent repérer des problèmes que vous auriez pu manquer.
+Faire réviser notre code par des pairs pour repérer les éventuelles vulnérabilités ou erreurs de logique. Une autre paire d'yeux peut souvent repérer des problèmes que nous aurions pu manquer.
 
 ### 9. Utilisation de fonctions sécurisées
-Utilisez des fonctions de sécurité intégrées lorsque cela est possible, par exemple, utilisez des fonctions de hachage intégrées pour le traitement des mots de passe au lieu de les stocker en texte brut.
+Utiliser des fonctions de sécurité intégrées lorsque cela est possible, par exemple: utilisation des fonctions de hachage intégrées pour le traitement des mots de passe au lieu de les stocker en texte brut.
 
 ### 10. Évitez l'évaluation de commandes dynamiques
-Évitez d'utiliser des évaluations de commandes dynamiques comme **eval**, car
+Éviter l'utiliser des évaluations de commandes dynamiques comme **eval**, car
 elles peuvent introduire des vulnérabilités si elles ne sont pas correctement
 contrôlées.
+
+__Évidemment cette liste est loin d'âtre exhaustive, nous aurions pu inclure un
+niveau de protection contextuel comme _SELinux_ pour nous assurer de la délimitation
+du périmètre d'action des scripts.__
 
 ## Utilisation d'API Web dans un script
 
