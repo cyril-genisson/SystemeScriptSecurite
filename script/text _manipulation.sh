@@ -4,7 +4,7 @@ CSV_PY='create_csv.py'
 
 # Écrire le script Python dans un fichier temporaire
 cat >$CSV_PY <<EOF
-#!/usr/bin/python3
+#!/usr/bin/env python3
 import csv
 
 # Données à ajouter dans le fichier CSV
