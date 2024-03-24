@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 # Fonction pour rechercher les mises à jour disponibles
 search_updates() {
