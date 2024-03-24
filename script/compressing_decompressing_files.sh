@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 # Chemin complet du fichier "mon_texte.txt"
 source_file="$HOME/Documents/mon_texte.txt"
