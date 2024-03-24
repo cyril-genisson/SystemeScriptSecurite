@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 # Dossier principal de l'utilisateur
 HOME_DIR=$HOME
