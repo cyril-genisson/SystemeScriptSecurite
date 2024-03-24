@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 # Nom du fichier CSV de sortie
 file_system_monitoring_csv="file_system_monitoring.csv"
