@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 CSV_PY='create_csv.py'
 
