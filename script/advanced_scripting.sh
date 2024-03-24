@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 # Vérifier si inotify-tools est installé
 if ! command -v inotifywait &> /dev/null; then
